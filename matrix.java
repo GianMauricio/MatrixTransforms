@@ -1,20 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package matrix;
 
-/**
- *
- * @author user
- */
+//Gian Cedric Amos Mauricio - X_22
+//11839651 - IET-GDS
+
+/*
+Checklist:
+    * Variables
+        - nRows[/]
+        - nCols[/]
+        - aValues[/]
+    * Constructors
+        - Identity matrix[/]
+        - Zero matrix with given dimensions[/]
+        - matrix with dimensions and values[/]
+    * Functions
+        - toString[/]
+        - add[/]
+        - scale[/]
+        - mult[/]
+        - transpose[/]
+    * Additional Functions
+        - minor[/]
+        - determinant[/]
+    *Gauss-Jordan Elimination Algorithm
+        - Getting determinant using GJE[]
+        - Returning the solution to linear equations using GJE[]
+           - Can handle whole numbers[/]
+           - Can handle negative numbers[/]
+           - Can handle fractions[]
+    *Appropriate variable names[/]
+*/
+
 public class matrix {
     public int nRows;
     public int nCols;
     public double[][] aValues;
 
-    //Create an identity matrix based on a given size
+    //Create a matrix based on a given size, matrix is automatically an identity
     public matrix(int size)
     {
         nRows = size;
@@ -71,37 +92,6 @@ public class matrix {
 
         return null;
     }
-
-    //Matrix scaling (Used in composing a scaling matrix)
-    //Slight conversion needed to accommodate unique scale values across x y and z
-    public matrix scale(double dScalar)
-    {
-        double[][] newVals = new double[nRows][nCols];
-
-        for (int i = 0; i < nRows; i++)
-            for (int j = 0; j < nCols; j++)
-                newVals[i][j] = aValues[i][j] * dScalar;
-
-        return new matrix(nRows, nCols, newVals);
-    }
-
-    //Matrix multiplication (Can serve for composition, but ordering is hard to find out)
-    public matrix mult(matrix other)
-    {
-        if (nCols == other.nRows) {
-            double[][] newVals = new double[nRows][other.nCols];
-
-            for (int i = 0; i < nRows; i++)
-                for (int j = 0; j < other.nCols; j++)
-                    for (int k = 0; k < other.nRows; k++)
-                        newVals[i][j] = newVals[i][j] + aValues[i][k] * other.aValues[k][j];
-
-            return new matrix(nRows, other.nCols, newVals);
-        } else {
-            System.out.println("Not Possible");
-            return null;
-        }
-    }
     
     public matrix createTranslate(double x, double y, double z)
     {
@@ -122,6 +112,37 @@ public class matrix {
         return val;
     }
 
+    //Composes a scale matrix based on given integers per axis
+    public matrix Createscale(double Sx, double Sy, double Sz)
+    {
+        matrix Scale = new matrix(4);
+
+        //Assign values at all appropriate areas
+        Scale.aValues[0][0] = Sx;
+        Scale.aValues[1][1] = Sy;
+        Scale.aValues[2][2] = Sz;
+
+        return Scale;
+    }
+
+    //Matrix multiplication (Can serve for composition, but ordering is hard to find out)
+    public matrix mult(matrix other)
+    {
+        if (nCols == other.nRows) {
+            double[][] newVals = new double[nRows][other.nCols];
+
+            for (int i = 0; i < nRows; i++)
+                for (int j = 0; j < other.nCols; j++)
+                    for (int k = 0; k < other.nRows; k++)
+                        newVals[i][j] = newVals[i][j] + aValues[i][k] * other.aValues[k][j];
+
+            return new matrix(nRows, other.nCols, newVals);
+        } else {
+            System.out.println("Not Possible");
+            return null;
+        }
+    }
+
     //Shifts the matrix orientation
     public matrix transpose()
     {
@@ -132,5 +153,32 @@ public class matrix {
                 newVals[i][j] = aValues[j][i];
 
         return new matrix(nCols, nRows, newVals);
+    }
+
+    //Skews the matrix in one axis in reference to the other two axes by a certain value
+    public matrix Createskew(int nAxis, double nValue){
+        matrix Skew = new matrix(4);
+
+        switch(nAxis){
+            //Skew across x
+            case 1:
+                Skew.aValues[0][1] = nValue; /*Reference to y*/
+                Skew.aValues[0][2] = nValue; /*Reference to z*/
+                break;
+
+            //Skew across y
+            case 2:
+                Skew.aValues[1][0] = nValue; /*Reference to x*/
+                Skew.aValues[1][2] = nValue; /*Reference to z*/
+                break;
+
+            //Skew across z
+            case 3:
+                Skew.aValues[2][0] = nValue; /*Reference to x*/
+                Skew.aValues[2][1] = nValue; /*Reference to y*/
+                break;
+        }
+
+        return Skew;
     }
 }

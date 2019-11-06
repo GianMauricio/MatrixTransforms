@@ -134,4 +134,31 @@ public class matrix {
 
         return new matrix(nCols, nRows, newVals);
     }
+
+    //Skews the matrix in one axis in reference to the other two axes by a certain value
+    public matrix Createskew(int nAxis, double nValue){
+        matrix Skew = new matrix(4);
+
+        switch(nAxis){
+            //Skew across x
+            case 1:
+                Skew.aValues[0][1] = nValue; /*Reference to y*/
+                Skew.aValues[0][2] = nValue; /*Reference to z*/
+                break;
+
+            //Skew across y
+            case 2:
+                Skew.aValues[1][0] = nValue; /*Reference to x*/
+                Skew.aValues[1][2] = nValue; /*Reference to z*/
+                break;
+
+            //Skew across z
+            case 3:
+                Skew.aValues[2][0] = nValue; /*Reference to x*/
+                Skew.aValues[2][1] = nValue; /*Reference to y*/
+                break;
+        }
+
+        return Skew;
+    }
 }

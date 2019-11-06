@@ -43,7 +43,7 @@ public class MatrixTester
 
         //Testing matrix scaling
         System.out.println("Matrix Scaling: ");
-        System.out.println("Generate matrix scaled to 2 3 4");
+        System.out.println("Generate scaled matrix for 2x 3y 4z");
         System.out.println();
 
         double[][] newValues3 = {{1, 2, 3}, {2, 3, 4}, {1, 1, 1}};
@@ -52,6 +52,33 @@ public class MatrixTester
         matrix scaledMatrix = newMatrix5.Createscale(2, 3, 4);
         System.out.println("Matrix: ");
         scaledMatrix.toString();
+        System.out.println();
+        System.out.println();
+
+        //Testing matrix Skewing
+        matrix skewlaunch = new matrix(4);
+        System.out.println("Matrix Skewing 1: ");
+        System.out.println("Generate skew matrix for 4 across x");
+        System.out.println();
+
+        matrix skew1 = skewlaunch.Createskew(1, 4);
+        skew1.toString();
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Matrix Skewing 2: ");
+        System.out.println("Generate skew matrix for 18 across y");
+
+        matrix skew2 = skewlaunch.Createskew(2, 18);
+        skew2.toString();
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Matrix Skewing 3: ");
+        System.out.println("Generate skew matrix for 14 across z");
+        matrix skew3 = skewlaunch.Createskew(3, 14);
+        skew3.toString();
+        System.out.println();
         System.out.println();
 
         //Testing matrix multiplication

@@ -14,7 +14,7 @@ public class matrix {
     public int nCols;
     public double[][] aValues;
 
-    //Create an identity matrix based on a given size
+    //Create a matrix based on a given size, matrix is automatically an identity
     public matrix(int size)
     {
         nRows = size;
@@ -71,18 +71,45 @@ public class matrix {
 
         return null;
     }
+    
+    //composes a translate matrix based on the given input per axis
+    public matrix createTranslate(double x, double y, double z)
+    {        
+        matrix translate = new matrix(4);
+        
+        //assign translate values to the corresponding areas
+        translate.aValues[0][3] = x;
+        translate.aValues[1][3] = y;
+        translate.aValues[2][3] = z;
+        
+        return translate;
+    }
+    
+    public matrix createSqueeze(double k){
+        
+        matrix squeeze = new matrix(4);
+        
+        squeeze.aValues[0][1] = k;
+        squeeze.aValues[0][2] = k;
+        squeeze.aValues[1][0] = k;
+        squeeze.aValues[1][2] = k; 
+        squeeze.aValues[2][0] = k;
+        squeeze.aValues[2][1] = k;
+        
+        return squeeze;
+    }
 
-    //Matrix scaling (Used in composing a scaling matrix)
-    //Slight conversion needed to accommodate unique scale values across x y and z
-    public matrix scale(double dScalar)
+    //Composes a scale matrix based on given integers per axis
+    public matrix Createscale(double Sx, double Sy, double Sz)
     {
-        double[][] newVals = new double[nRows][nCols];
+        matrix Scale = new matrix(4);
 
-        for (int i = 0; i < nRows; i++)
-            for (int j = 0; j < nCols; j++)
-                newVals[i][j] = aValues[i][j] * dScalar;
+        //Assign values at all appropriate areas
+        Scale.aValues[0][0] = Sx;
+        Scale.aValues[1][1] = Sy;
+        Scale.aValues[2][2] = Sz;
 
-        return new matrix(nRows, nCols, newVals);
+        return Scale;
     }
 
     //Matrix multiplication (Can serve for composition, but ordering is hard to find out)
@@ -102,25 +129,6 @@ public class matrix {
             return null;
         }
     }
-    
-    public matrix createTranslate(double x, double y, double z)
-    {
-        nCols = 4;
-        nRows = 4;
-        
-        double[][] transVals = new double[nRows][nCols];
-
-        for (int i = 0; i < nRows; i++)
-            transVals[i][i] = 1;
-        
-        transVals[0][3] = x;
-        transVals[1][3] = y;
-        transVals[2][3] = z;
-        
-        matrix val = new matrix(nRows, nCols, transVals);
-        
-        return val;
-    }
 
     //Shifts the matrix orientation
     public matrix transpose()
@@ -132,5 +140,32 @@ public class matrix {
                 newVals[i][j] = aValues[j][i];
 
         return new matrix(nCols, nRows, newVals);
+    }
+
+    //Skews the matrix in one axis in reference to the other two axes by a certain value
+    public matrix Createskew(int nAxis, double nValue){
+        matrix Skew = new matrix(4);
+
+        switch(nAxis){
+            //Skew across x
+            case 1:
+                Skew.aValues[0][1] = nValue; /*Reference to y*/
+                Skew.aValues[0][2] = nValue; /*Reference to z*/
+                break;
+
+            //Skew across y
+            case 2:
+                Skew.aValues[1][0] = nValue; /*Reference to x*/
+                Skew.aValues[1][2] = nValue; /*Reference to z*/
+                break;
+
+            //Skew across z
+            case 3:
+                Skew.aValues[2][0] = nValue; /*Reference to x*/
+                Skew.aValues[2][1] = nValue; /*Reference to y*/
+                break;
+        }
+
+        return Skew;
     }
 }

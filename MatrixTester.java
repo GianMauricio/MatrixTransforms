@@ -100,9 +100,9 @@ public class MatrixTester
         double[][] newValues3 = {{2, 2, 2}, {3, 3, 3}, {2, 2, 2}};
         matrix newMatrix5 = new matrix(3, 3, newValues3);
 
-        matrix scaledMatrix = newMatrix5.scale(3);
+        //matrix scaledMatrix = newMatrix5.scale(3);
         System.out.println("Final Values: ");
-        scaledMatrix.toString();
+        //scaledMatrix.toString();
         System.out.println();
 
         //Testing matrix multiplication
@@ -167,6 +167,17 @@ public class MatrixTester
         matrix result = trans.mult(m);
         System.out.println("Result matrix: ");
         result.toString();
+        
+        double[][] newValues8 = {{0, 1, 0, 1},{0, 0, 1, 0},{0, 0, 0, 1},{1, 1, 1, 1}};
+        matrix m1 = new matrix(4, 4, newValues8);
+        matrix squeeze = m1.createSqueeze(0.5);
+        System.out.println("Squeeze matrix: ");
+        squeeze.toString();
+        
+        matrix squeezeresult = squeeze.mult(m1);
+        System.out.println("Result matrix: ");
+        squeezeresult.toString();
+        
         
     }
     

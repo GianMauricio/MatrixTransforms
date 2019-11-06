@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package matrix;
+//Gian Mauricio - X_22; 11839651 - IET-GDS
+// Carlo Tongco - X_22; 11712147 - CS-GDS
 
-/**
- *
- * @author user
- */
+import java.math.*;
+
 public class matrix {
     public int nRows;
     public int nCols;
@@ -71,33 +65,6 @@ public class matrix {
 
         return null;
     }
-    
-    //composes a translate matrix based on the given input per axis
-    public matrix createTranslate(double x, double y, double z)
-    {        
-        matrix translate = new matrix(4);
-        
-        //assign translate values to the corresponding areas
-        translate.aValues[0][3] = x;
-        translate.aValues[1][3] = y;
-        translate.aValues[2][3] = z;
-        
-        return translate;
-    }
-    
-    public matrix createSqueeze(double k){
-        
-        matrix squeeze = new matrix(4);
-        
-        squeeze.aValues[0][1] = k;
-        squeeze.aValues[0][2] = k;
-        squeeze.aValues[1][0] = k;
-        squeeze.aValues[1][2] = k; 
-        squeeze.aValues[2][0] = k;
-        squeeze.aValues[2][1] = k;
-        
-        return squeeze;
-    }
 
     //Composes a scale matrix based on given integers per axis
     public matrix Createscale(double Sx, double Sy, double Sz)
@@ -143,7 +110,7 @@ public class matrix {
     }
 
     //Skews the matrix in one axis in reference to the other two axes by a certain value
-    public matrix Createskew(int nAxis, double nValue){
+    public matrix CreateSkew(int nAxis, double nValue){
         matrix Skew = new matrix(4);
 
         switch(nAxis){
@@ -168,4 +135,52 @@ public class matrix {
 
         return Skew;
     }
+
+    //Rotates the matrix by a certain amount in degrees, across an axis
+    public matrix CreateSpin(int nAxis, double dTheta){
+        matrix Spun = new matrix(4);
+
+        //Euler implementation
+        switch(nAxis){
+            //Rotate across x
+            case 1:
+                Spun.aValues[1][1] = Math.cos(dTheta);
+                Spun.aValues[1][2] = -Math.sin(dTheta);
+                Spun.aValues[2][1] = Math.sin(dTheta);
+                Spun.aValues[2][2] = Math.cos(dTheta);
+                break;
+
+            //Rotate across y
+            case 2:
+                Spun.aValues[0][0] = Math.cos(dTheta);
+                Spun.aValues[0][2] = Math.sin(dTheta);
+                Spun.aValues[2][0] = -Math.sin(dTheta);
+                Spun.aValues[2][2] = Math.cos(dTheta);
+                break;
+
+            //Rotate across z
+            case 3:
+                Spun.aValues[0][0] = Math.cos(dTheta);
+                Spun.aValues[0][1] = -Math.sin(dTheta);
+                Spun.aValues[1][0] = Math.sin(dTheta);
+                Spun.aValues[1][1] = Math.cos(dTheta);
+                break;
+        }
+        return Spun;
+    }
+  
+  public matrix createSqueeze(double k){
+        
+        matrix squeeze = new matrix(4);
+        
+        squeeze.aValues[0][1] = k;
+        squeeze.aValues[0][2] = k;
+        squeeze.aValues[1][0] = k;
+        squeeze.aValues[1][2] = k; 
+        squeeze.aValues[2][0] = k;
+        squeeze.aValues[2][1] = k;
+        
+        return squeeze;
+    }
+
 }

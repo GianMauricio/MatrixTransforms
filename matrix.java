@@ -1,40 +1,20 @@
-//Gian Cedric Amos Mauricio - X_22
-//11839651 - IET-GDS
-
 /*
-Checklist:
-    * Variables
-        - nRows[/]
-        - nCols[/]
-        - aValues[/]
-    * Constructors
-        - Identity matrix[/]
-        - Zero matrix with given dimensions[/]
-        - matrix with dimensions and values[/]
-    * Functions
-        - toString[/]
-        - add[/]
-        - scale[/]
-        - mult[/]
-        - transpose[/]
-    * Additional Functions
-        - minor[/]
-        - determinant[/]
-    *Gauss-Jordan Elimination Algorithm
-        - Getting determinant using GJE[]
-        - Returning the solution to linear equations using GJE[]
-           - Can handle whole numbers[/]
-           - Can handle negative numbers[/]
-           - Can handle fractions[]
-    *Appropriate variable names[/]
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package matrix;
 
+/**
+ *
+ * @author user
+ */
 public class matrix {
     public int nRows;
     public int nCols;
     public double[][] aValues;
 
-    //Create a matrix based on a given size, all items within are 0
+    //Create an identity matrix based on a given size
     public matrix(int size)
     {
         nRows = size;
@@ -121,6 +101,25 @@ public class matrix {
             System.out.println("Not Possible");
             return null;
         }
+    }
+    
+    public matrix createTranslate(double x, double y, double z)
+    {
+        nCols = 4;
+        nRows = 4;
+        
+        double[][] transVals = new double[nRows][nCols];
+
+        for (int i = 0; i < nRows; i++)
+            transVals[i][i] = 1;
+        
+        transVals[0][3] = x;
+        transVals[1][3] = y;
+        transVals[2][3] = z;
+        
+        matrix val = new matrix(nRows, nCols, transVals);
+        
+        return val;
     }
 
     //Shifts the matrix orientation

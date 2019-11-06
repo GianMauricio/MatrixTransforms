@@ -1,3 +1,4 @@
+
 //Gian Cedric Amos Mauricio - X_22
 //11839651 - IET-GDS
 
@@ -90,6 +91,25 @@ public class matrix {
         }
 
         return null;
+    }
+    
+    public matrix createTranslate(double x, double y, double z)
+    {
+        nCols = 4;
+        nRows = 4;
+        
+        double[][] transVals = new double[nRows][nCols];
+
+        for (int i = 0; i < nRows; i++)
+            transVals[i][i] = 1;
+        
+        transVals[0][3] = x;
+        transVals[1][3] = y;
+        transVals[2][3] = z;
+        
+        matrix val = new matrix(nRows, nCols, transVals);
+        
+        return val;
     }
 
     //Composes a scale matrix based on given integers per axis

@@ -1,34 +1,7 @@
+//Gian Mauricio - X_22; 11839651 - IET-GDS
+// Carlo Tongco - X_22; 11712147 - CS-GDS
 
-//Gian Cedric Amos Mauricio - X_22
-//11839651 - IET-GDS
-
-/*
-Checklist:
-    * Variables
-        - nRows[/]
-        - nCols[/]
-        - aValues[/]
-    * Constructors
-        - Identity matrix[/]
-        - Zero matrix with given dimensions[/]
-        - matrix with dimensions and values[/]
-    * Functions
-        - toString[/]
-        - add[/]
-        - scale[/]
-        - mult[/]
-        - transpose[/]
-    * Additional Functions
-        - minor[/]
-        - determinant[/]
-    *Gauss-Jordan Elimination Algorithm
-        - Getting determinant using GJE[]
-        - Returning the solution to linear equations using GJE[]
-           - Can handle whole numbers[/]
-           - Can handle negative numbers[/]
-           - Can handle fractions[]
-    *Appropriate variable names[/]
-*/
+import java.math.*;
 
 public class matrix {
     public int nRows;
@@ -92,25 +65,6 @@ public class matrix {
 
         return null;
     }
-    
-    public matrix createTranslate(double x, double y, double z)
-    {
-        nCols = 4;
-        nRows = 4;
-        
-        double[][] transVals = new double[nRows][nCols];
-
-        for (int i = 0; i < nRows; i++)
-            transVals[i][i] = 1;
-        
-        transVals[0][3] = x;
-        transVals[1][3] = y;
-        transVals[2][3] = z;
-        
-        matrix val = new matrix(nRows, nCols, transVals);
-        
-        return val;
-    }
 
     //Composes a scale matrix based on given integers per axis
     public matrix Createscale(double Sx, double Sy, double Sz)
@@ -156,7 +110,7 @@ public class matrix {
     }
 
     //Skews the matrix in one axis in reference to the other two axes by a certain value
-    public matrix Createskew(int nAxis, double nValue){
+    public matrix CreateSkew(int nAxis, double nValue){
         matrix Skew = new matrix(4);
 
         switch(nAxis){
@@ -180,5 +134,38 @@ public class matrix {
         }
 
         return Skew;
+    }
+
+    //Rotates the matrix by a certain amount in degrees, across an axis
+    public matrix CreateSpin(int nAxis, double dTheta){
+        matrix Spun = new matrix(4);
+
+        //Euler implementation
+        switch(nAxis){
+            //Rotate across x
+            case 1:
+                Spun.aValues[1][1] = Math.cos(dTheta);
+                Spun.aValues[1][2] = -Math.sin(dTheta);
+                Spun.aValues[2][1] = Math.sin(dTheta);
+                Spun.aValues[2][2] = Math.cos(dTheta);
+                break;
+
+            //Rotate across y
+            case 2:
+                Spun.aValues[0][0] = Math.cos(dTheta);
+                Spun.aValues[0][2] = Math.sin(dTheta);
+                Spun.aValues[2][0] = -Math.sin(dTheta);
+                Spun.aValues[2][2] = Math.cos(dTheta);
+                break;
+
+            //Rotate across z
+            case 3:
+                Spun.aValues[0][0] = Math.cos(dTheta);
+                Spun.aValues[0][1] = -Math.sin(dTheta);
+                Spun.aValues[1][0] = Math.sin(dTheta);
+                Spun.aValues[1][1] = Math.cos(dTheta);
+                break;
+        }
+        return Spun;
     }
 }

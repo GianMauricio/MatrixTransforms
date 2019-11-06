@@ -168,4 +168,37 @@ public class matrix {
 
         return Skew;
     }
+    
+    //Rotates the matrix by a certain amount in degrees, across an axis
+    public matrix CreateSpin(int nAxis, double dTheta){
+        matrix Spun = new matrix(4);
+
+        //Euler implementation
+        switch(nAxis){
+            //Rotate across x
+            case 1:
+                Spun.aValues[1][1] = Math.cos(dTheta);
+                Spun.aValues[1][2] = -Math.sin(dTheta);
+                Spun.aValues[2][1] = Math.sin(dTheta);
+                Spun.aValues[2][2] = Math.cos(dTheta);
+                break;
+
+            //Rotate across y
+            case 2:
+                Spun.aValues[0][0] = Math.cos(dTheta);
+                Spun.aValues[0][2] = Math.sin(dTheta);
+                Spun.aValues[2][0] = -Math.sin(dTheta);
+                Spun.aValues[2][2] = Math.cos(dTheta);
+                break;
+
+            //Rotate across z
+            case 3:
+                Spun.aValues[0][0] = Math.cos(dTheta);
+                Spun.aValues[0][1] = -Math.sin(dTheta);
+                Spun.aValues[1][0] = Math.sin(dTheta);
+                Spun.aValues[1][1] = Math.cos(dTheta);
+                break;
+        }
+        return Spun;
+    }
 }

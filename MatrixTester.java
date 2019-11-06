@@ -42,20 +42,15 @@ public class MatrixTester
         System.out.println();
 
         //Testing matrix scaling
-        System.out.println("matrix scaling: ");
-        System.out.println("matrix: ");
-        System.out.println("Rows: 3");
-        System.out.println("Columns: 3");
-        System.out.print("Values: {[2, 2, 2], [3, 3, 3], [2, 2, 2]}");
-        System.out.println();
-        System.out.println("Scale by: 3");
+        System.out.println("Matrix Scaling: ");
+        System.out.println("Generate matrix scaled to 2 3 4");
         System.out.println();
 
-        double[][] newValues3 = {{2, 2, 2}, {3, 3, 3}, {2, 2, 2}};
+        double[][] newValues3 = {{1, 2, 3}, {2, 3, 4}, {1, 1, 1}};
         matrix newMatrix5 = new matrix(3, 3, newValues3);
 
-        matrix scaledMatrix = newMatrix5.scale(3);
-        System.out.println("Final Values: ");
+        matrix scaledMatrix = newMatrix5.Createscale(2, 3, 4);
+        System.out.println("Matrix: ");
         scaledMatrix.toString();
         System.out.println();
 

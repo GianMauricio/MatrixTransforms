@@ -34,7 +34,7 @@ public class matrix {
     public int nCols;
     public double[][] aValues;
 
-    //Create a matrix based on a given size, all items within are 0
+    //Create a matrix based on a given size, matrix is automatically an identity
     public matrix(int size)
     {
         nRows = size;
@@ -92,17 +92,17 @@ public class matrix {
         return null;
     }
 
-    //Matrix scaling (Used in composing a scaling matrix)
-    //Slight conversion needed to accommodate unique scale values across x y and z
-    public matrix scale(double dScalar)
+    //Composes a scale matrix based on given integers per axis
+    public matrix Createscale(double Sx, double Sy, double Sz)
     {
-        double[][] newVals = new double[nRows][nCols];
+        matrix Scale = new matrix(4);
 
-        for (int i = 0; i < nRows; i++)
-            for (int j = 0; j < nCols; j++)
-                newVals[i][j] = aValues[i][j] * dScalar;
+        //Assign values at all appropriate areas
+        Scale.aValues[0][0] = Sx;
+        Scale.aValues[1][1] = Sy;
+        Scale.aValues[2][2] = Sz;
 
-        return new matrix(nRows, nCols, newVals);
+        return Scale;
     }
 
     //Matrix multiplication (Can serve for composition, but ordering is hard to find out)

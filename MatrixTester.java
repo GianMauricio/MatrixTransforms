@@ -55,25 +55,25 @@ public class MatrixTester
         System.out.println();
 
         //Testing matrix multiplication
-        System.out.println("matrix multiplication: ");
-        System.out.println("matrix 1: ");
-        System.out.println("Rows: 3");
-        System.out.println("Columns: 2");
-        System.out.print("Values: {[1, 2], [3, 4], [5, 6]}");
+        System.out.println("Matrix Composition: ");
+        System.out.println("Matrix 1: ");
+        System.out.println("Rows: 4");
+        System.out.println("Columns: 4");
+        System.out.print("Values: {{1, 0, 2, 0}, {1, 3, 4, 0}, {5, 1, 2, 0}, {0, 0, 0, 1}}");
         System.out.println();
         System.out.println();
-        System.out.println("matrix 2: ");
-        System.out.println("Rows: 2");
-        System.out.println("Columns: 3");
-        System.out.print("Values: {[1, 2, 3], [4, 5, 6]}");
+        System.out.println("Matrix 2: ");
+        System.out.println("Rows: 4");
+        System.out.println("Columns: 4");
+        System.out.print("Values: {{2, 1, 2, 0}, {0, 2, 1, 0}, {4, 10, 1, 0}, {0, 0, 0, 1}}");
         System.out.println();
         System.out.println();
 
-        double[][] newValues4 = {{1, 2}, {3, 4}, {5, 6}, {7, 8}};
-        matrix firstMultiple = new matrix(3, 2, newValues4);
+        double[][] newValues4 = {{1, 0, 2, 0}, {1, 3, 4, 0}, {5, 1, 2, 0}, {0, 0, 0, 1}};
+        matrix firstMultiple = new matrix(4, 4, newValues4);
 
-        double[][] newValues5 = {{1, 2, 3}, {4, 5, 6}};
-        matrix secondMultiple = new matrix(2, 3, newValues5);
+        double[][] newValues5 = {{2, 1, 2, 0}, {0, 2, 1, 0}, {4, 10, 1, 0}, {0, 0, 0, 1}};
+        matrix secondMultiple = new matrix(4, 4, newValues5);
 
         matrix multipliedMatrix = firstMultiple.mult(secondMultiple);
         System.out.println("Final Values: ");

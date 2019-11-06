@@ -34,6 +34,7 @@ public class matrix {
     public int nCols;
     public double[][] aValues;
 
+    //Create a matrix based on a given size, all items within are 0
     public matrix(int size)
     {
         nRows = size;
@@ -45,6 +46,7 @@ public class matrix {
             aValues[i][i] = 1;
     }
 
+    //Create a matrix based on a given set of rows and columns, all items within are 0
     public matrix(int rows, int cols)
     {
         nRows = rows;
@@ -58,6 +60,7 @@ public class matrix {
 
     }
 
+    //Create a matrix based on rows, columns and a given 2D array with values
     public matrix(int rows, int cols, double[][] values)
     {
         nRows = rows;
@@ -74,6 +77,8 @@ public class matrix {
         System.arraycopy(values, 0, aValues, 0, nRows);
     }
 
+    //Overrides to string function, writes all contents of the matrix
+    //Possibly convertible to write to file function from matrix
     @Override
     public String toString()
     {
@@ -87,6 +92,7 @@ public class matrix {
         return null;
     }
 
+    //Matrix addition (Legacy)
     public matrix add(matrix other)
     {
         if (nRows != other.nRows) {
@@ -105,6 +111,8 @@ public class matrix {
         }
     }
 
+    //Matrix scaling (Used in composing a scaling matrix)
+    //Slight conversion needed to accomodate unique scale values across x y and z
     public matrix scale(double dScalar)
     {
         double[][] newVals = new double[nRows][nCols];
@@ -116,6 +124,7 @@ public class matrix {
         return new matrix(nRows, nCols, newVals);
     }
 
+    //Matrix multiplication (Can serve for composition, but ordering is hard to find out)
     public matrix mult(matrix other)
     {
         if (nCols == other.nRows) {
@@ -133,6 +142,7 @@ public class matrix {
         }
     }
 
+    //Shifts the matrix orientation
     public matrix transpose()
     {
         double[][] newVals = new double[nCols][nRows];
@@ -144,6 +154,7 @@ public class matrix {
         return new matrix(nCols, nRows, newVals);
     }
 
+    //Removes the bottom row and right most column of the given matrix (Legacy)
     public matrix minor(matrix major, int nRow, int nCol)
     {
         int nMinorRow = 0, nMinorCol = 0;
@@ -167,7 +178,7 @@ public class matrix {
         return minor;
     }
 
-    //Made for recursion
+    //Converted for recursion
     public matrix minor(int nRow, int nCol)
     {
         int nMinorRow = 0, nMinorCol = 0;
@@ -191,6 +202,7 @@ public class matrix {
         return minor;
     }
 
+    //Returns the determinant of the given matrix
     public double determinant()
     {
         double dDeterminant = 0;
@@ -216,6 +228,7 @@ public class matrix {
         return dDeterminant;
     }
 
+    //I have no idea what this does, it also returns determinant
     public double det_ref()
     {
         double nDeterminant = 1;
@@ -251,6 +264,7 @@ public class matrix {
         return nDeterminant;
     }
 
+    //Algorithm for Gauss-Jordan Elimination
     /*Begin BIG BRAIN time*/
     matrix GJE(matrix augment)
     {

@@ -1,6 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package matrix;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author user
+ */
 public class MatrixTester
 {
     //Test area
+    public static double getTranslateInputX(){
+        
+        double translateX;
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter how much to translate in x: ");
+        translateX = scan.nextDouble();
+        
+        return translateX;
+    }
+    
+    public static double getTranslateInputY(){
+        
+        double translateY;
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter how much to translate in y: ");
+        translateY = scan.nextDouble();
+        
+        return translateY;
+    }
+    
+    public static double getTranslateInputZ(){
+        
+        double translateZ;
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter how much to translate in y: ");
+        translateZ = scan.nextDouble();
+        
+        return translateZ;
+    }
+    
     public static void main(String[] args)
     {
         //Testing Identity matrix
@@ -42,92 +88,43 @@ public class MatrixTester
         System.out.println();
 
         //Testing matrix scaling
-        System.out.println("Matrix Scaling: ");
-        System.out.println("Generate scaled matrix for 2x 3y 4z");
+        System.out.println("matrix scaling: ");
+        System.out.println("matrix: ");
+        System.out.println("Rows: 3");
+        System.out.println("Columns: 3");
+        System.out.print("Values: {[2, 2, 2], [3, 3, 3], [2, 2, 2]}");
+        System.out.println();
+        System.out.println("Scale by: 3");
         System.out.println();
 
-        double[][] newValues3 = {{1, 2, 3}, {2, 3, 4}, {1, 1, 1}};
+        double[][] newValues3 = {{2, 2, 2}, {3, 3, 3}, {2, 2, 2}};
         matrix newMatrix5 = new matrix(3, 3, newValues3);
 
-        matrix scaledMatrix = newMatrix5.Createscale(2, 3, 4);
-        System.out.println("Matrix: ");
-        scaledMatrix.toString();
-        System.out.println();
-        System.out.println();
-
-        //Testing matrix Skewing
-        matrix SkewLaunch = new matrix(4);
-        System.out.println("Matrix Skewing 1: ");
-        System.out.println("Generate skew matrix for 4 across x");
-        System.out.println();
-
-        matrix skew1 = SkewLaunch.CreateSkew(1, 4);
-        skew1.toString();
-        System.out.println();
-        System.out.println();
-
-        System.out.println("Matrix Skewing 2: ");
-        System.out.println("Generate skew matrix for 18 across y");
-
-        matrix skew2 = SkewLaunch.CreateSkew(2, 18);
-        skew2.toString();
-        System.out.println();
-        System.out.println();
-
-        System.out.println("Matrix Skewing 3: ");
-        System.out.println("Generate skew matrix for 14 across z");
-        matrix skew3 = SkewLaunch.CreateSkew(3, 14);
-        skew3.toString();
-        System.out.println();
-        System.out.println();
-
-        //Testing matrix rotation
-        matrix RotLaunch = new matrix(4);
-        System.out.println("Matrix Rotation 1: ");
-        System.out.println("Generate rotation matrix for 90 across x");
-        System.out.println();
-
-        matrix Rot1 = RotLaunch.CreateSpin(1, 90);
-        Rot1.toString();
-        System.out.println();
-        System.out.println();
-
-        System.out.println("Matrix Rotation 2: ");
-        System.out.println("Generate rotation matrix for 45 across y");
-
-        matrix Rot2 = RotLaunch.CreateSpin(2, 45);
-        Rot2.toString();
-        System.out.println();
-        System.out.println();
-
-        System.out.println("Matrix Rotation 3: ");
-        System.out.println("Generate rotation matrix for 60 across z");
-
-        matrix Rot3= RotLaunch.CreateSpin(3, 60);
-        Rot3.toString();
-        System.out.println();
+        //matrix scaledMatrix = newMatrix5.scale(3);
+        System.out.println("Final Values: ");
+        //scaledMatrix.toString();
         System.out.println();
 
         //Testing matrix multiplication
-        System.out.println("Matrix Composition: ");
-        System.out.println("Matrix 1: ");
-        System.out.println("Rows: 4");
-        System.out.println("Columns: 4");
-        System.out.print("Values: {{1, 0, 2, 0}, {1, 3, 4, 0}, {5, 1, 2, 0}, {0, 0, 0, 1}}");
+        System.out.println("matrix multiplication: ");
+        System.out.println("matrix 1: ");
+        System.out.println("Rows: 3");
+        System.out.println("Columns: 2");
+        System.out.print("Values: {[1, 2], [3, 4], [5, 6]}");
         System.out.println();
         System.out.println();
-        System.out.println("Matrix 2: ");
-        System.out.println("Rows: 4");
-        System.out.println("Columns: 4");
-        System.out.print("Values: {{2, 1, 2, 0}, {0, 2, 1, 0}, {4, 10, 1, 0}, {0, 0, 0, 1}}");
+        System.out.println("matrix 2: ");
+        System.out.println("Rows: 2");
+        System.out.println("Columns: 3");
+        System.out.print("Values: {[1, 2, 3], [4, 5, 6]}");
         System.out.println();
         System.out.println();
 
-        double[][] newValues4 = {{1, 0, 2, 0}, {1, 3, 4, 0}, {5, 1, 2, 0}, {0, 0, 0, 1}};
-        matrix firstMultiple = new matrix(4, 4, newValues4);
+        double[][] newValues4 = {{1, 2}, {3, 4}, {5, 6}, {7, 8}};
+        matrix firstMultiple = new matrix(3, 2, newValues4);
 
-        double[][] newValues5 = {{2, 1, 2, 0}, {0, 2, 1, 0}, {4, 10, 1, 0}, {0, 0, 0, 1}};
-        matrix secondMultiple = new matrix(4, 4, newValues5);
+        double[][] newValues5 = {{1, 2, 3}, {4, 5, 6}};
+        matrix secondMultiple = new matrix(2, 3, newValues5);
 
         matrix multipliedMatrix = firstMultiple.mult(secondMultiple);
         System.out.println("Final Values: ");
@@ -152,5 +149,36 @@ public class MatrixTester
 
         System.out.println("Final Values: ");
         transposedMatrix.toString();
+        
+        double[][] newValues7 = {{1},{2},{3},{1}};
+        matrix m = new matrix(4, 1, newValues7);
+        
+        System.out.println("Input matrix: ");
+        m.toString();
+        
+        //double translateX = getTranslateInputX();
+        //double translateY = getTranslateInputY();
+        //double translateZ = getTranslateInputZ();
+        matrix n = new matrix(4);
+        matrix trans = n.createTranslate(3, 4, 5);
+        System.out.println("Translate matrix: ");
+        trans.toString();
+        
+        matrix result = trans.mult(m);
+        System.out.println("Result matrix: ");
+        result.toString();
+        
+        double[][] newValues8 = {{0, 1, 0, 1},{0, 0, 1, 0},{0, 0, 0, 1},{1, 1, 1, 1}};
+        matrix m1 = new matrix(4, 4, newValues8);
+        matrix squeeze = m1.createSqueeze(0.5);
+        System.out.println("Squeeze matrix: ");
+        squeeze.toString();
+        
+        matrix squeezeresult = squeeze.mult(m1);
+        System.out.println("Result matrix: ");
+        squeezeresult.toString();
+        
+        
     }
+    
 }

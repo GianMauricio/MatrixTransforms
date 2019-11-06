@@ -168,4 +168,19 @@ public class matrix {
         }
         return Spun;
     }
+  
+  public matrix createSqueeze(double k){
+        
+        matrix squeeze = new matrix(4);
+        
+        squeeze.aValues[0][1] = k;
+        squeeze.aValues[0][2] = k;
+        squeeze.aValues[1][0] = k;
+        squeeze.aValues[1][2] = k; 
+        squeeze.aValues[2][0] = k;
+        squeeze.aValues[2][1] = k;
+        
+        return squeeze;
+    }
+
 }

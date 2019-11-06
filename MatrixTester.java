@@ -1,6 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package matrix;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author user
+ */
 public class MatrixTester
 {
     //Test area
+    public static double getTranslateInputX(){
+        
+        double translateX;
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter how much to translate in x: ");
+        translateX = scan.nextDouble();
+        
+        return translateX;
+    }
+    
+    public static double getTranslateInputY(){
+        
+        double translateY;
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter how much to translate in y: ");
+        translateY = scan.nextDouble();
+        
+        return translateY;
+    }
+    
+    public static double getTranslateInputZ(){
+        
+        double translateZ;
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter how much to translate in y: ");
+        translateZ = scan.nextDouble();
+        
+        return translateZ;
+    }
+    
     public static void main(String[] args)
     {
         //Testing Identity matrix
@@ -103,5 +149,25 @@ public class MatrixTester
 
         System.out.println("Final Values: ");
         transposedMatrix.toString();
+        
+        double[][] newValues7 = {{1},{2},{3},{1}};
+        matrix m = new matrix(4, 1, newValues7);
+        
+        System.out.println("Input matrix: ");
+        m.toString();
+        
+        //double translateX = getTranslateInputX();
+        //double translateY = getTranslateInputY();
+        //double translateZ = getTranslateInputZ();
+        matrix n = new matrix(4);
+        matrix trans = n.createTranslate(3, 4, 5);
+        System.out.println("Translate matrix: ");
+        trans.toString();
+        
+        matrix result = trans.mult(m);
+        System.out.println("Result matrix: ");
+        result.toString();
+        
     }
+    
 }

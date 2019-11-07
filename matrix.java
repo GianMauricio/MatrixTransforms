@@ -5,10 +5,8 @@
  */
 package matrix;
 
-/**
- *
- * @author user
- */
+//Gian Mauricio - X_22; 11839651 - IET-GDS
+// Carlo Tongco - X_22; 11712147 - CS-GDS
 public class matrix {
     public int nRows;
     public int nCols;
@@ -62,14 +60,17 @@ public class matrix {
     @Override
     public String toString()
     {
+        String newString = "";
         for (double[] ElementY : aValues) {
-            System.out.print("[ ");
-            for (double ElementX : ElementY)
-                System.out.printf("%.2f ", ElementX);
-            System.out.println("]");
+            for(int i = 0; i < ElementY.length; i++){
+                newString = newString.concat(Double.toString(ElementY[i]));
+                if(i < 2){
+                    newString = newString.concat(", ");
+                }
+            }
+            newString = newString.concat("\n");
         }
-
-        return null;
+        return newString;
     }
     
     //composes a translate matrix based on the given input per axis
@@ -85,6 +86,7 @@ public class matrix {
         return translate;
     }
     
+    //composes a squeeze 
     public matrix createSqueeze(double k){
         
         matrix squeeze = new matrix(4);
@@ -201,4 +203,3 @@ public class matrix {
         }
         return Spun;
     }
-}

@@ -1,7 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package matrix;
-import java.util.ArrayList;
 
 //Gian Mauricio - X_22; 11839651 - IET-GDS
+
+import java.util.ArrayList;
+
 // Carlo Tongco - X_22; 11712147 - CS-GDS
 public class matrix {
     public int nRows;
@@ -63,9 +70,9 @@ public class matrix {
                 //Convert to cartesian before adding to array set
                 double spherVals[] = new double[3],
                        cartVals[];
-                spherVals[0] = Source.get(i).charAt(3);
-                spherVals[1] = Source.get(i).charAt(6);
-                spherVals[2] = Source.get(i).charAt(9);
+                spherVals[0] = Character.getNumericValue(Source.get(i).charAt(3));
+                spherVals[1] = Character.getNumericValue(Source.get(i).charAt(6));
+                spherVals[2] = Character.getNumericValue(Source.get(i).charAt(9));
 
                 cartVals = toCart(spherVals);
 
@@ -78,9 +85,9 @@ public class matrix {
             /*Cartesian*/
             else if(Source.get(i).startsWith("c")){
                 //Add to array set depending on the contents of the string
-                newVals[0][i] = Source.get(i).charAt(3);
-                newVals[1][i] = Source.get(i).charAt(6);
-                newVals[2][i] = Source.get(i).charAt(9);
+                newVals[0][i] = Character.getNumericValue(Source.get(i).charAt(3));
+                newVals[1][i] = Character.getNumericValue(Source.get(i).charAt(6));
+                newVals[2][i] = Character.getNumericValue(Source.get(i).charAt(9));
                 newVals[3][i] = 1.0;
             }
         }
@@ -117,10 +124,10 @@ public class matrix {
     public String toString()
     {
         String newString = "";
-        for (double[] ElementY : aValues) {
-            for(int i = 0; i < ElementY.length - 1; i++){
-                newString = newString.concat(Double.toString(ElementY[i]));
-                if(i < 2){
+        for(int i = 0; i < nRows - 1; i++){
+            for(int j = 0; j < nCols; j++){
+                newString = newString.concat(Double.toString(aValues[i][j]));
+                if(j < nCols - 1) {
                     newString = newString.concat(", ");
                 }
             }
@@ -227,6 +234,37 @@ public class matrix {
         return Skew;
     }
     
+    public matrix createProjection(int nPlane, double n){
+        matrix project = new matrix(4);
+        
+        //switch statement for different planes
+        switch(nPlane){
+            //Project along the xy plane
+            case 1: 
+                project.aValues[0][0] = n;
+                project.aValues[1][1] = n;
+                project.aValues[2][2] = 0;
+                project.aValues[2][3] = -1;
+                break;
+            //Project along the yz plane
+            case 2: 
+                project.aValues[0][0] = 0;
+                project.aValues[1][1] = n;
+                project.aValues[2][2] = n;
+                project.aValues[2][3] = -1;
+                break;
+            //Project along the xz plane
+            case 3: 
+                project.aValues[0][0] = n;
+                project.aValues[1][1] = 0;
+                project.aValues[2][2] = n;
+                project.aValues[2][3] = -1;
+                break;
+        }
+        
+        return project;
+    }
+    
     //Rotates the matrix by a certain amount in degrees, across an axis
     public matrix CreateSpin(int nAxis, double dTheta){
         matrix Spun = new matrix(4);
@@ -258,5 +296,37 @@ public class matrix {
                 break;
         }
         return Spun;
+    }
+
+    //Returns a matrix which brings the matrix to origin
+    public matrix baryCenter(matrix Current){
+        matrix Bary = new matrix(4);
+        int nTotal = Current.nCols;
+        for(int i = 0; i < nTotal; i++){
+            Bary.aValues[0][3] += Current.aValues[0][i];/*Sum of all X*/
+            Bary.aValues[1][3] += Current.aValues[1][i];/*Sum of all Y*/
+            Bary.aValues[2][3] += Current.aValues[2][i];/*Sum of all Z*/
+        }
+
+        Bary.aValues[0][3] /= nTotal;
+        Bary.aValues[1][3] /= nTotal;
+        Bary.aValues[2][3] /= nTotal;
+        return Bary;
+    }
+
+    //Returns a matrix which returns the matrix to the current location
+    public matrix baryReturn(matrix Current){
+        matrix Bary = new matrix(4);
+        int nTotal = Current.nCols;
+        for(int i = 0; i < nTotal; i++){
+            Bary.aValues[0][3] += Current.aValues[0][i];/*Sum of all X*/
+            Bary.aValues[1][3] += Current.aValues[1][i];/*Sum of all Y*/
+            Bary.aValues[2][3] += Current.aValues[2][i];/*Sum of all Z*/
+        }
+
+        Bary.aValues[0][3] /= -nTotal;
+        Bary.aValues[1][3] /= -nTotal;
+        Bary.aValues[2][3] /= -nTotal;
+        return Bary;
     }
 }

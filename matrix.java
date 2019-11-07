@@ -90,7 +90,7 @@ public class matrix {
         System.arraycopy(newVals, 0, aValues, 0, nRows);
     }
 
-    //Converts shperical coordinates to cartesian coordinates
+    //Converts spherical coordinates to cartesian coordinates
     private double[] toCart(double Spher[]){
         double dRads = Spher[0],
                dTheta = Spher[1],
@@ -224,6 +224,37 @@ public class matrix {
         }
 
         return Skew;
+    }
+    
+    public matrix createProjection(int nPlane, double n){
+        matrix project = new matrix(4);
+        
+        //switch statement for different planes
+        switch(nPlane){
+            //Project along the xy plane
+            case 1: 
+                project.aValues[0][0] = n;
+                project.aValues[1][1] = n;
+                project.aValues[2][2] = 0;
+                project.aValues[2][3] = -1;
+                break;
+            //Project along the yz plane
+            case 2: 
+                project.aValues[0][0] = 0;
+                project.aValues[1][1] = n;
+                project.aValues[2][2] = n;
+                project.aValues[2][3] = -1;
+                break;
+            //Project along the xz plane
+            case 3: 
+                project.aValues[0][0] = n;
+                project.aValues[1][1] = 0;
+                project.aValues[2][2] = n;
+                project.aValues[2][3] = -1;
+                break;
+        }
+        
+        return project;
     }
     
     //Rotates the matrix by a certain amount in degrees, across an axis

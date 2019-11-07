@@ -49,7 +49,7 @@ public class MatrixTester
     {
         int operation = 0;
         Scanner scan = new Scanner(System.in);
-        matrix composeTransform = new matrix(4);
+        matrix composeTransform = new matrix(4);/*Matrix to hold the total transformations*/
 
         File filename = new File("E:\\Work\\La Salle Stuff\\Outputs\\Term 4\\GDMATH\\GitExports\\MatrixTransforms\\input.txt");
         ArrayList<String> val;
@@ -69,45 +69,52 @@ public class MatrixTester
             System.out.println("[4] - Squeeze");
             System.out.println("[5] - Project");
             System.out.println("[6] - Rotate");
-            System.out.println("[7] - Compose all Transformations and print to file");
+            System.out.println("[7] - Apply transformations to vector set");
 
             operation = scan.nextInt();
 
             switch(operation){
-                case 1:
+                case 1:/*Translation*/
+                    System.out.println("Enter how much to translate in x: ");
+                    double translateX = scan.nextDouble();
+                    System.out.println("Enter how much to translate in y: ");
+                    double translateY = scan.nextDouble();
+                    System.out.println("Enter how much to translate in y: ");
+                    double translateZ = scan.nextDouble();
+
+                    matrix translate = new matrix(4);
+                    translate = translate.createTranslate(translateX, translateY, translateZ);
+
+                    composeTransform = translate.mult(composeTransform);/*Commit translate to current transforms*/
                     break;
 
-                case 2:
+                case 2:/*Scaling*/
+                    System.out.println("[1] Object space");
+                    System.out.println("[2] World space");
+
+                    operation = scan.nextInt();
+
+                    if(operation == 1){
+
+                    }
+
+                    else{
+
+                    }
                     break;
 
-                case 3:
+                case 3:/*Distort*/
                     break;
 
-                case 4:
+                case 4:/*Squeeze*/
                     break;
 
-                case 5:
+                case 5:/*Projection*/
                     break;
 
-                case 6:
+                case 6:/*Rotation*/
                     break;
             }
         }while(operation != 7);
-        
-        switch(operation){
-            case 1: 
-                System.out.println("Enter how much to translate in x: ");
-                double translateX = scan.nextDouble();
-                System.out.println("Enter how much to translate in y: ");
-                double translateY = scan.nextDouble();
-                System.out.println("Enter how much to translate in y: ");
-                double translateZ = scan.nextDouble();
-                
-                matrix translate = new matrix(4);
-                translate = translate.createTranslate(translateX, translateY, translateZ);
-                break;
-            case 2:
-                
-        }
     }
 }

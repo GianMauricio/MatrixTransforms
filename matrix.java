@@ -1,7 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package matrix;
+
 import java.util.ArrayList;
 
 //Gian Mauricio - X_22; 11839651 - IET-GDS
 // Carlo Tongco - X_22; 11712147 - CS-GDS
+
 public class matrix {
     public int nRows;
     public int nCols;

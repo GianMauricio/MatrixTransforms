@@ -38,7 +38,7 @@ public class MatrixTester
     
     private static void writeToFile(String data) {
         
-        File file = new File("C:\\Users\\user\\Desktop\\output.txt");
+        File file = new File("<DESTINATION>");
         try{    
             FileWriter fw = new FileWriter(file);    
             fw.write(data);    
@@ -54,7 +54,7 @@ public class MatrixTester
         Scanner scan = new Scanner(System.in);
         matrix composeTransform = new matrix(4);/*Matrix to hold the total transformations*/
 
-        File filename = new File("E:\\Work\\La Salle Stuff\\Outputs\\Term 4\\GDMATH\\GitExports\\MatrixTransforms\\input.txt");
+        File filename = new File("<FILEPATH>");
         ArrayList<String> val;
 
         val = readFromFile(filename);
@@ -184,6 +184,8 @@ public class MatrixTester
                     
                     matrix project = new matrix(4);
                     project = project.createProjection(nPlane, n);
+                    
+                    composeTransform = project.mult(composeTransform);
                     break;
 
                 case 6:/*Rotation*/
@@ -216,5 +218,8 @@ public class MatrixTester
                     break;
             }
         }while(operation != 7);
+        
+        String finalValues = composeTransform.toString();
+        writeToFile(finalValues);
     }
 }

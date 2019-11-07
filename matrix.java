@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package matrix;
+import java.util.ArrayList;
 
 //Gian Mauricio - X_22; 11839651 - IET-GDS
 // Carlo Tongco - X_22; 11712147 - CS-GDS
@@ -53,6 +49,66 @@ public class matrix {
         */
 
         System.arraycopy(values, 0, aValues, 0, nRows);
+    }
+  
+    public matrix(ArrayList<String> Source){
+        int nElements = Source.size();
+        double newVals[][] = new double[4][nElements];
+
+        //Loops through the main ArrayList of strings
+        for(int i = 0; i < nElements; i++){
+            //Parses each string by inspecting the first element
+            /*Spherical*/
+            if(Source.get(i).startsWith("s")){
+                //Convert to cartesian before adding to array set
+                double spherVals[] = new double[3],
+                       cartVals[];
+                spherVals[0] = Source.get(i).charAt(3);
+                spherVals[1] = Source.get(i).charAt(6);
+                spherVals[2] = Source.get(i).charAt(9);
+
+                cartVals = toCart(spherVals);
+
+                newVals[0][i] = cartVals[0];
+                newVals[1][i] = cartVals[1];
+                newVals[2][i] = cartVals[2];
+                newVals[3][i] = 1.0;
+            }
+
+            /*Cartesian*/
+            else if(Source.get(i).startsWith("c")){
+                //Add to array set depending on the contents of the string
+                newVals[0][i] = Source.get(i).charAt(3);
+                newVals[1][i] = Source.get(i).charAt(6);
+                newVals[2][i] = Source.get(i).charAt(9);
+                newVals[3][i] = 1.0;
+            }
+        }
+
+        nRows = 4;
+        nCols = nElements;
+        aValues = new double[nRows][nCols];
+        System.arraycopy(newVals, 0, aValues, 0, nRows);
+    }
+
+    //Converts shperical coordinates to cartesian coordinates
+    private double[] toCart(double Spher[]){
+        double dRads = Spher[0],
+               dTheta = Spher[1],
+               dPho = Spher[2];
+
+        double[] cartVals = new double[3];
+
+        /*For x*/
+        cartVals[0] = dRads * Math.sin(dPho) * Math.cos(dTheta);
+
+        /*For y*/
+        cartVals[1] = dRads * Math.sin(dPho) * Math.sin(dTheta);
+
+        /*For z*/
+        cartVals[2] = dRads * Math.cos(dPho);
+
+        return cartVals;
     }
 
     //Overrides to string function, writes all contents of the matrix

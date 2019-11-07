@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package matrix;
+
 import java.util.Scanner;
 import java.io.*;
 import java.util.ArrayList;
 
 //Gian Mauricio - X_22; 11839651 - IET-GDS
 // Carlo Tongco - X_22; 11712147 - CS-GDS
+
 public class MatrixTester
 {
     //Test area    
@@ -170,6 +173,17 @@ public class MatrixTester
                     break;
 
                 case 5:/*Projection*/
+                    System.out.println("Enter the value for n: ");
+                    double n = scan.nextDouble();
+                    
+                    System.out.println("Enter which plane to project?");
+                    System.out.println("[1] - XY Plane");
+                    System.out.println("[2] - YZ Plane");
+                    System.out.println("[3] - XZ Plane");
+                    int nPlane = scan.nextInt();
+                    
+                    matrix project = new matrix(4);
+                    project = project.createProjection(nPlane, n);
                     break;
 
                 case 6:/*Rotation*/

@@ -5,10 +5,8 @@
  */
 package matrix;
 
-/**
- *
- * @author user
- */
+//Gian Mauricio - X_22; 11839651 - IET-GDS
+// Carlo Tongco - X_22; 11712147 - CS-GDS
 public class matrix {
     public int nRows;
     public int nCols;
@@ -62,14 +60,17 @@ public class matrix {
     @Override
     public String toString()
     {
+        String newString = "";
         for (double[] ElementY : aValues) {
-            System.out.print("[ ");
-            for (double ElementX : ElementY)
-                System.out.printf("%.2f ", ElementX);
-            System.out.println("]");
+            for(int i = 0; i < ElementY.length; i++){
+                newString = newString.concat(Double.toString(ElementY[i]));
+                if(i < 2){
+                    newString = newString.concat(", ");
+                }
+            }
+            newString = newString.concat("\n");
         }
-
-        return null;
+        return newString;
     }
     
     //composes a translate matrix based on the given input per axis
@@ -85,6 +86,7 @@ public class matrix {
         return translate;
     }
     
+    //composes a squeeze 
     public matrix createSqueeze(double k){
         
         matrix squeeze = new matrix(4);
@@ -167,5 +169,38 @@ public class matrix {
         }
 
         return Skew;
+    }
+    
+    //Rotates the matrix by a certain amount in degrees, across an axis
+    public matrix CreateSpin(int nAxis, double dTheta){
+        matrix Spun = new matrix(4);
+
+        //Euler implementation
+        switch(nAxis){
+            //Rotate across x
+            case 1:
+                Spun.aValues[1][1] = Math.cos(dTheta);
+                Spun.aValues[1][2] = -Math.sin(dTheta);
+                Spun.aValues[2][1] = Math.sin(dTheta);
+                Spun.aValues[2][2] = Math.cos(dTheta);
+                break;
+
+            //Rotate across y
+            case 2:
+                Spun.aValues[0][0] = Math.cos(dTheta);
+                Spun.aValues[0][2] = Math.sin(dTheta);
+                Spun.aValues[2][0] = -Math.sin(dTheta);
+                Spun.aValues[2][2] = Math.cos(dTheta);
+                break;
+
+            //Rotate across z
+            case 3:
+                Spun.aValues[0][0] = Math.cos(dTheta);
+                Spun.aValues[0][1] = -Math.sin(dTheta);
+                Spun.aValues[1][0] = Math.sin(dTheta);
+                Spun.aValues[1][1] = Math.cos(dTheta);
+                break;
+        }
+        return Spun;
     }
 }

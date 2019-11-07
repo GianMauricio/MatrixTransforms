@@ -96,16 +96,14 @@ public class MatrixTester
         
         System.out.println("Input matrix: ");
         m.toString();
-//        
-//        //double translateX = getTranslateInputX();
-//        //double translateY = getTranslateInputY();
-//        //double translateZ = getTranslateInputZ();
+
         matrix n = new matrix(4);
         matrix trans = n.createTranslate(3, 4, 5);
         System.out.println("Translate matrix: ");
         trans.toString();
         
         matrix result = trans.mult(m);
+        result = result.transpose();
         System.out.println("Result matrix: ");
         String output = result.toString();
         System.out.println(output);

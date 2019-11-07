@@ -13,40 +13,7 @@ import java.util.ArrayList;
 // Carlo Tongco - X_22; 11712147 - CS-GDS
 public class MatrixTester
 {
-    //Test area
-    public static double getTranslateInputX(){
-        
-        double translateX;
-        
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter how much to translate in x: ");
-        translateX = scan.nextDouble();
-        
-        return translateX;
-    }
-    
-    public static double getTranslateInputY(){
-        
-        double translateY;
-        
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter how much to translate in y: ");
-        translateY = scan.nextDouble();
-        
-        return translateY;
-    }
-    
-    public static double getTranslateInputZ(){
-        
-        double translateZ;
-        
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter how much to translate in y: ");
-        translateZ = scan.nextDouble();
-        
-        return translateZ;
-    }
-    
+    //Test area    
     public static ArrayList<String> readFromFile(File file) throws Exception{
         
         Scanner sc = new Scanner(file); 
@@ -82,6 +49,36 @@ public class MatrixTester
     
     public static void main(String[] args) throws Exception
     {
+        int operation = 0;
+        Scanner scan = new Scanner(System.in);
+        matrix composeTransform = new matrix(4);
+        
+        do{
+            System.out.println("Perform which 3D Transformation?");
+            System.out.println("[1] - Translate");
+            System.out.println("[2] - Scale");
+            System.out.println("[3] - Distort");
+            System.out.println("[4] - Squeeze");
+            System.out.println("[5] - Project");
+            System.out.println("[6] - Rotate");
+        }while(operation != 1 && operation != 2 &&operation != 3 && operation != 4 &&operation != 5 && operation != 6);
+        
+        switch(operation){
+            case 1: 
+                System.out.println("Enter how much to translate in x: ");
+                double translateX = scan.nextDouble();
+                System.out.println("Enter how much to translate in y: ");
+                double translateY = scan.nextDouble();
+                System.out.println("Enter how much to translate in y: ");
+                double translateZ = scan.nextDouble();
+                
+                matrix translate = new matrix(4);
+                translate = translate.createTranslate(translateX, translateY, translateZ);
+                break;
+            case 2:
+                
+        }
+                
 //        File filename = new File("C:\\Users\\user\\Desktop\\input.txt"); 
 //        ArrayList<String> val = new ArrayList<>();
 //        
@@ -97,17 +94,14 @@ public class MatrixTester
         System.out.println("Input matrix: ");
         m.toString();
 
-        matrix n = new matrix(4);
-        matrix trans = n.createTranslate(3, 4, 5);
-        System.out.println("Translate matrix: ");
-        trans.toString();
+
         
-        matrix result = trans.mult(m);
-        result = result.transpose();
-        System.out.println("Result matrix: ");
-        String output = result.toString();
-        System.out.println(output);
-        writeToFile(output);
+//        matrix result = trans.mult(m);
+//        result = result.transpose();
+//        System.out.println("Result matrix: ");
+//        String output = result.toString();
+//        System.out.println(output);
+//        writeToFile(output);
 //        
 //        double[][] newValues8 = {{0, 1, 0, 1},{0, 0, 1, 0},{0, 0, 0, 1},{1, 1, 1, 1}};
 //        matrix m1 = new matrix(4, 4, newValues8);

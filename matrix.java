@@ -259,4 +259,36 @@ public class matrix {
         }
         return Spun;
     }
+
+    //Returns a matrix which brings the matrix to origin
+    public matrix baryCenter(matrix Current){
+        matrix Bary = new matrix(4);
+        int nTotal = Current.nCols;
+        for(int i = 0; i < nTotal; i++){
+            Bary.aValues[0][3] += Current.aValues[0][i];/*Sum of all X*/
+            Bary.aValues[1][3] += Current.aValues[1][i];/*Sum of all Y*/
+            Bary.aValues[2][3] += Current.aValues[2][i];/*Sum of all Z*/
+        }
+
+        Bary.aValues[0][3] /= nTotal;
+        Bary.aValues[1][3] /= nTotal;
+        Bary.aValues[2][3] /= nTotal;
+        return Bary;
+    }
+
+    //Returns a matrix which returns the matrix to the current location
+    public matrix baryReturn(matrix Current){
+        matrix Bary = new matrix(4);
+        int nTotal = Current.nCols;
+        for(int i = 0; i < nTotal; i++){
+            Bary.aValues[0][3] += Current.aValues[0][i];/*Sum of all X*/
+            Bary.aValues[1][3] += Current.aValues[1][i];/*Sum of all Y*/
+            Bary.aValues[2][3] += Current.aValues[2][i];/*Sum of all Z*/
+        }
+
+        Bary.aValues[0][3] /= -nTotal;
+        Bary.aValues[1][3] /= -nTotal;
+        Bary.aValues[2][3] /= -nTotal;
+        return Bary;
+    }
 }

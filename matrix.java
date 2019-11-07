@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+import java.util.ArrayList;
 package matrix;
 
 //Gian Mauricio - X_22; 11839651 - IET-GDS
@@ -55,6 +52,27 @@ public class matrix {
         System.arraycopy(values, 0, aValues, 0, nRows);
     }
 
+    public matrix(ArrayList<String> Source){
+        int nElements = Source.size();
+        double newVals[][] = new double[nElements][3];
+
+        matrix ComposedMatrix = new matrix(nElements, 3, newVals);
+        //Loops through the main ArrayList of strings
+        for(int i = 0; i < nElements; i++){
+            //Parses each string by inspecting the first element
+            /*Spherical*/
+            if(Source.get(i).startsWith("s")){
+                //Convert to cartesian before adding to array set
+            }
+
+            /*Cartesian*/
+            else if(Source.get(i).startsWith("c")){
+                //Add to array set depending on the contents of the string
+                newVals[i][0] = Source.get(i).charAt(3);
+            }
+        }
+    }
+
     //Overrides to string function, writes all contents of the matrix
     //Possibly convertible to write to file function from matrix
     @Override
@@ -87,6 +105,33 @@ public class matrix {
     }
     
     //composes a squeeze 
+    public matrix createSqueeze(double k){
+        
+        matrix squeeze = new matrix(4);
+        
+        squeeze.aValues[0][1] = k;
+        squeeze.aValues[0][2] = k;
+        squeeze.aValues[1][0] = k;
+        squeeze.aValues[1][2] = k; 
+        squeeze.aValues[2][0] = k;
+        squeeze.aValues[2][1] = k;
+        
+        return squeeze;
+    }
+    
+    //composes a translate matrix based on the given input per axis
+    public matrix createTranslate(double x, double y, double z)
+    {        
+        matrix translate = new matrix(4);
+        
+        //assign translate values to the corresponding areas
+        translate.aValues[0][3] = x;
+        translate.aValues[1][3] = y;
+        translate.aValues[2][3] = z;
+        
+        return translate;
+    }
+    
     public matrix createSqueeze(double k){
         
         matrix squeeze = new matrix(4);

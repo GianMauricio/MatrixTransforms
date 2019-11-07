@@ -62,7 +62,7 @@ public class matrix {
     {
         String newString = "";
         for (double[] ElementY : aValues) {
-            for(int i = 0; i < ElementY.length; i++){
+            for(int i = 0; i < ElementY.length - 1; i++){
                 newString = newString.concat(Double.toString(ElementY[i]));
                 if(i < 2){
                     newString = newString.concat(", ");
@@ -203,3 +203,4 @@ public class matrix {
         }
         return Spun;
     }
+}

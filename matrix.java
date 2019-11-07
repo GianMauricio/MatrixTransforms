@@ -1,4 +1,4 @@
-package matrix;
+
 import java.util.ArrayList;
 
 //Gian Mauricio - X_22; 11839651 - IET-GDS
@@ -63,9 +63,9 @@ public class matrix {
                 //Convert to cartesian before adding to array set
                 double spherVals[] = new double[3],
                        cartVals[];
-                spherVals[0] = Source.get(i).charAt(3);
-                spherVals[1] = Source.get(i).charAt(6);
-                spherVals[2] = Source.get(i).charAt(9);
+                spherVals[0] = Character.getNumericValue(Source.get(i).charAt(3));
+                spherVals[1] = Character.getNumericValue(Source.get(i).charAt(6));
+                spherVals[2] = Character.getNumericValue(Source.get(i).charAt(9));
 
                 cartVals = toCart(spherVals);
 
@@ -78,9 +78,9 @@ public class matrix {
             /*Cartesian*/
             else if(Source.get(i).startsWith("c")){
                 //Add to array set depending on the contents of the string
-                newVals[0][i] = Source.get(i).charAt(3);
-                newVals[1][i] = Source.get(i).charAt(6);
-                newVals[2][i] = Source.get(i).charAt(9);
+                newVals[0][i] = Character.getNumericValue(Source.get(i).charAt(3));
+                newVals[1][i] = Character.getNumericValue(Source.get(i).charAt(6));
+                newVals[2][i] = Character.getNumericValue(Source.get(i).charAt(9));
                 newVals[3][i] = 1.0;
             }
         }
@@ -117,10 +117,10 @@ public class matrix {
     public String toString()
     {
         String newString = "";
-        for (double[] ElementY : aValues) {
-            for(int i = 0; i < ElementY.length - 1; i++){
-                newString = newString.concat(Double.toString(ElementY[i]));
-                if(i < 2){
+        for(int i = 0; i < nRows - 1; i++){
+            for(int j = 0; j < nCols; j++){
+                newString = newString.concat(Double.toString(aValues[i][j]));
+                if(j < nCols - 1) {
                     newString = newString.concat(", ");
                 }
             }

@@ -3,8 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package matrix;
-
 import java.util.Scanner;
 import java.io.*;
 import java.util.ArrayList;
@@ -52,7 +50,17 @@ public class MatrixTester
         int operation = 0;
         Scanner scan = new Scanner(System.in);
         matrix composeTransform = new matrix(4);
-        
+
+        File filename = new File("E:\\Work\\La Salle Stuff\\Outputs\\Term 4\\GDMATH\\GitExports\\MatrixTransforms\\input.txt");
+        ArrayList<String> val;
+
+        val = readFromFile(filename);
+        matrix inputVectors = new matrix(val);
+        String testString = inputVectors.toString();
+
+        System.out.println(val);
+        System.out.println(testString);
+
         do{
             System.out.println("Perform which 3D Transformation?");
             System.out.println("[1] - Translate");
@@ -61,7 +69,30 @@ public class MatrixTester
             System.out.println("[4] - Squeeze");
             System.out.println("[5] - Project");
             System.out.println("[6] - Rotate");
-        }while(operation != 1 && operation != 2 &&operation != 3 && operation != 4 &&operation != 5 && operation != 6);
+            System.out.println("[7] - Compose all Transformations and print to file");
+
+            operation = scan.nextInt();
+
+            switch(operation){
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    break;
+
+                case 4:
+                    break;
+
+                case 5:
+                    break;
+
+                case 6:
+                    break;
+            }
+        }while(operation != 7);
         
         switch(operation){
             case 1: 
@@ -78,39 +109,5 @@ public class MatrixTester
             case 2:
                 
         }
-                
-//        File filename = new File("C:\\Users\\user\\Desktop\\input.txt"); 
-//        ArrayList<String> val = new ArrayList<>();
-//        
-//        val = readFile(filename);
-//        
-//        for(int i = 0; i< val.size(); i++){
-//            System.out.println(val.get(i));
-//        }            
-        
-        double[][] newValues7 = {{1},{2},{3},{1}};
-        matrix m = new matrix(4, 1, newValues7);
-        
-        System.out.println("Input matrix: ");
-        m.toString();
-
-
-        
-//        matrix result = trans.mult(m);
-//        result = result.transpose();
-//        System.out.println("Result matrix: ");
-//        String output = result.toString();
-//        System.out.println(output);
-//        writeToFile(output);
-//        
-//        double[][] newValues8 = {{0, 1, 0, 1},{0, 0, 1, 0},{0, 0, 0, 1},{1, 1, 1, 1}};
-//        matrix m1 = new matrix(4, 4, newValues8);
-//        matrix squeeze = m1.createSqueeze(0.5);
-//        System.out.println("Squeeze matrix: ");
-//        squeeze.toString();
-//        
-//        matrix squeezeresult = squeeze.mult(m1);
-//        System.out.println("Result matrix: ");
-//        squeezeresult.toString();
     }
 }

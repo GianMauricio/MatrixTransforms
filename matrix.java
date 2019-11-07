@@ -1,7 +1,9 @@
-import java.util.ArrayList;
 
-//Gian Mauricio 11839651 X_22;
-//Carlo Tongco 11712147 X_22;
+import java.util.ArrayList;
+package matrix;
+
+//Gian Mauricio - X_22; 11839651 - IET-GDS
+// Carlo Tongco - X_22; 11712147 - CS-GDS
 public class matrix {
     public int nRows;
     public int nCols;
@@ -76,14 +78,45 @@ public class matrix {
     @Override
     public String toString()
     {
+        String newString = "";
         for (double[] ElementY : aValues) {
-            System.out.print("[ ");
-            for (double ElementX : ElementY)
-                System.out.printf("%.2f ", ElementX);
-            System.out.println("]");
+            for(int i = 0; i < ElementY.length; i++){
+                newString = newString.concat(Double.toString(ElementY[i]));
+                if(i < 2){
+                    newString = newString.concat(", ");
+                }
+            }
+            newString = newString.concat("\n");
         }
-
-        return null;
+        return newString;
+    }
+    
+    //composes a translate matrix based on the given input per axis
+    public matrix createTranslate(double x, double y, double z)
+    {        
+        matrix translate = new matrix(4);
+        
+        //assign translate values to the corresponding areas
+        translate.aValues[0][3] = x;
+        translate.aValues[1][3] = y;
+        translate.aValues[2][3] = z;
+        
+        return translate;
+    }
+    
+    //composes a squeeze 
+    public matrix createSqueeze(double k){
+        
+        matrix squeeze = new matrix(4);
+        
+        squeeze.aValues[0][1] = k;
+        squeeze.aValues[0][2] = k;
+        squeeze.aValues[1][0] = k;
+        squeeze.aValues[1][2] = k; 
+        squeeze.aValues[2][0] = k;
+        squeeze.aValues[2][1] = k;
+        
+        return squeeze;
     }
     
     //composes a translate matrix based on the given input per axis
@@ -215,4 +248,3 @@ public class matrix {
         }
         return Spun;
     }
-}

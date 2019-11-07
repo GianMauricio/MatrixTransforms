@@ -1,156 +1,124 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package matrix;
+
+import java.util.Scanner;
+import java.io.*;
+import java.util.ArrayList;
+
+//Gian Mauricio - X_22; 11839651 - IET-GDS
+// Carlo Tongco - X_22; 11712147 - CS-GDS
 public class MatrixTester
 {
     //Test area
-    public static void main(String[] args)
+    public static double getTranslateInputX(){
+        
+        double translateX;
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter how much to translate in x: ");
+        translateX = scan.nextDouble();
+        
+        return translateX;
+    }
+    
+    public static double getTranslateInputY(){
+        
+        double translateY;
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter how much to translate in y: ");
+        translateY = scan.nextDouble();
+        
+        return translateY;
+    }
+    
+    public static double getTranslateInputZ(){
+        
+        double translateZ;
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter how much to translate in y: ");
+        translateZ = scan.nextDouble();
+        
+        return translateZ;
+    }
+    
+    public static ArrayList<String> readFromFile(File file) throws Exception{
+        
+        Scanner sc = new Scanner(file); 
+        ArrayList<String> values = new ArrayList<>();
+        
+        while (sc.hasNextLine()) {
+            String i = sc.nextLine(); 
+            values.add(i);
+        }
+        
+        FileReader fr = new FileReader(file); 
+        LineNumberReader lnr = new LineNumberReader(fr);
+        int lines = 0;
+ 
+        while (lnr.readLine() != null) {
+            lines++;
+        }  
+        
+        return values;
+    }
+    
+    private static void writeToFile(String data) {
+        
+        File file = new File("C:\\Users\\user\\Desktop\\output.txt");
+        try{    
+            FileWriter fw = new FileWriter(file);    
+            fw.write(data);    
+            fw.close();    
+        }catch(Exception e){
+            System.out.println(e);
+        }    
+    } 
+    
+    public static void main(String[] args) throws Exception
     {
-        //Testing Identity matrix
-        System.out.println("Identity matrix: ");
-        System.out.println("Size: 5");
-        System.out.println();
-
-        matrix newMatrix = new matrix(4);
-        newMatrix.toString();
-
-        System.out.println();
-        System.out.println();
-
-        //Testing Zero matrix
-        System.out.println("Zero matrix: ");
-        System.out.println("Rows: 6");
-        System.out.println("Columns: 3");
-        System.out.println();
-
-        matrix newMatrix2 = new matrix(6, 3);
-        newMatrix2.toString();
-
-        System.out.println();
-        System.out.println();
-
-        //Testing matrix Actual
-        System.out.println("matrix: ");
-        System.out.println("Rows: 3");
-        System.out.println("Columns: 3");
-        System.out.print("Values: {[1, 2, 3], [4, 5, 6], [7, 8, 9]}");
-        System.out.println();
-
-        double[][] newValues = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-
-        matrix newMatrix3 = new matrix(3, 3, newValues);
-        newMatrix3.toString();
-
-        System.out.println();
-        System.out.println();
-
-        //Testing matrix scaling
-        System.out.println("Matrix Scaling: ");
-        System.out.println("Generate scaled matrix for 2x 3y 4z");
-        System.out.println();
-
-        double[][] newValues3 = {{1, 2, 3}, {2, 3, 4}, {1, 1, 1}};
-        matrix newMatrix5 = new matrix(3, 3, newValues3);
-
-        matrix scaledMatrix = newMatrix5.Createscale(2, 3, 4);
-        System.out.println("Matrix: ");
-        scaledMatrix.toString();
-        System.out.println();
-        System.out.println();
-
-        //Testing matrix Skewing
-        matrix SkewLaunch = new matrix(4);
-        System.out.println("Matrix Skewing 1: ");
-        System.out.println("Generate skew matrix for 4 across x");
-        System.out.println();
-
-        matrix skew1 = SkewLaunch.CreateSkew(1, 4);
-        skew1.toString();
-        System.out.println();
-        System.out.println();
-
-        System.out.println("Matrix Skewing 2: ");
-        System.out.println("Generate skew matrix for 18 across y");
-
-        matrix skew2 = SkewLaunch.CreateSkew(2, 18);
-        skew2.toString();
-        System.out.println();
-        System.out.println();
-
-        System.out.println("Matrix Skewing 3: ");
-        System.out.println("Generate skew matrix for 14 across z");
-        matrix skew3 = SkewLaunch.CreateSkew(3, 14);
-        skew3.toString();
-        System.out.println();
-        System.out.println();
-
-        //Testing matrix rotation
-        matrix RotLaunch = new matrix(4);
-        System.out.println("Matrix Rotation 1: ");
-        System.out.println("Generate rotation matrix for 90 across x");
-        System.out.println();
-
-        matrix Rot1 = RotLaunch.CreateSpin(1, 90);
-        Rot1.toString();
-        System.out.println();
-        System.out.println();
-
-        System.out.println("Matrix Rotation 2: ");
-        System.out.println("Generate rotation matrix for 45 across y");
-
-        matrix Rot2 = RotLaunch.CreateSpin(2, 45);
-        Rot2.toString();
-        System.out.println();
-        System.out.println();
-
-        System.out.println("Matrix Rotation 3: ");
-        System.out.println("Generate rotation matrix for 60 across z");
-
-        matrix Rot3= RotLaunch.CreateSpin(3, 60);
-        Rot3.toString();
-        System.out.println();
-        System.out.println();
-
-        //Testing matrix multiplication
-        System.out.println("Matrix Composition: ");
-        System.out.println("Matrix 1: ");
-        System.out.println("Rows: 4");
-        System.out.println("Columns: 4");
-        System.out.print("Values: {{1, 0, 2, 0}, {1, 3, 4, 0}, {5, 1, 2, 0}, {0, 0, 0, 1}}");
-        System.out.println();
-        System.out.println();
-        System.out.println("Matrix 2: ");
-        System.out.println("Rows: 4");
-        System.out.println("Columns: 4");
-        System.out.print("Values: {{2, 1, 2, 0}, {0, 2, 1, 0}, {4, 10, 1, 0}, {0, 0, 0, 1}}");
-        System.out.println();
-        System.out.println();
-
-        double[][] newValues4 = {{1, 0, 2, 0}, {1, 3, 4, 0}, {5, 1, 2, 0}, {0, 0, 0, 1}};
-        matrix firstMultiple = new matrix(4, 4, newValues4);
-
-        double[][] newValues5 = {{2, 1, 2, 0}, {0, 2, 1, 0}, {4, 10, 1, 0}, {0, 0, 0, 1}};
-        matrix secondMultiple = new matrix(4, 4, newValues5);
-
-        matrix multipliedMatrix = firstMultiple.mult(secondMultiple);
-        System.out.println("Final Values: ");
-        multipliedMatrix.toString();
-
-        System.out.println();
-        System.out.println();
-
-        //Testing matrix transposition
-        System.out.println("matrix transposition: ");
-        System.out.println("matrix: ");
-        System.out.println("Rows: 2");
-        System.out.println("Columns: 3");
-        System.out.print("Values: {[2, 4, 6], [3, 6, 9]}");
-        System.out.println();
-        System.out.println();
-
-        double[][] newValues6 = {{2, 4, 6}, {3, 6, 9}};
-        matrix originalMatrix = new matrix(2, 3, newValues6);
-
-        matrix transposedMatrix = originalMatrix.transpose();
-
-        System.out.println("Final Values: ");
-        transposedMatrix.toString();
+//        File filename = new File("C:\\Users\\user\\Desktop\\input.txt"); 
+//        ArrayList<String> val = new ArrayList<>();
+//        
+//        val = readFile(filename);
+//        
+//        for(int i = 0; i< val.size(); i++){
+//            System.out.println(val.get(i));
+//        }            
+        
+        double[][] newValues7 = {{1},{2},{3},{1}};
+        matrix m = new matrix(4, 1, newValues7);
+        
+        System.out.println("Input matrix: ");
+        m.toString();
+//        
+//        //double translateX = getTranslateInputX();
+//        //double translateY = getTranslateInputY();
+//        //double translateZ = getTranslateInputZ();
+        matrix n = new matrix(4);
+        matrix trans = n.createTranslate(3, 4, 5);
+        System.out.println("Translate matrix: ");
+        trans.toString();
+        
+        matrix result = trans.mult(m);
+        System.out.println("Result matrix: ");
+        String output = result.toString();
+        System.out.println(output);
+        writeToFile(output);
+//        
+//        double[][] newValues8 = {{0, 1, 0, 1},{0, 0, 1, 0},{0, 0, 0, 1},{1, 1, 1, 1}};
+//        matrix m1 = new matrix(4, 4, newValues8);
+//        matrix squeeze = m1.createSqueeze(0.5);
+//        System.out.println("Squeeze matrix: ");
+//        squeeze.toString();
+//        
+//        matrix squeezeresult = squeeze.mult(m1);
+//        System.out.println("Result matrix: ");
+//        squeezeresult.toString();
     }
 }
